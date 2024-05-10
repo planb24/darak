@@ -6,10 +6,14 @@ import {
     BASE_PATH,
     EVENT_CREATE_PATH,
     EVENT_DETAIL_PATH,
+    CREDIT_PATH,
     CHAT_PATH,
     PREF_PATH
 } from "./domain/constants/paths";
 import { LoginPage } from "./pages/login";
+import { SignUpPage } from "./pages/signup";
+import { MainPage } from "./pages/main";
+import { PostPage } from "./pages/post";
 
 export const router = createBrowserRouter([
     {
@@ -17,7 +21,19 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
     },
     {
+        path: SIGNUP_PATH,
+        element: <SignUpPage />,
+    },
+    {
+        path: EVENT_CREATE_PATH,
+        element: <PostPage />,
+    },
+    {
+        path: "/",
+        element: <MainPage />,
+    },
+    {
         path: "*",
-        element: <Navigate replace to="/login" />,
+        element: <Navigate replace to={LOGIN_PATH} />,
     },
 ]);

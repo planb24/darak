@@ -23,3 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 .env
+public/web-sample1.jpg
+public/web-sample2.jpg
+public/web-sample3.jpg
+public/team-logo-black.png
+public/team-logo.png
+public/logo-raw-colored.png
+public/logo-raw-white.png

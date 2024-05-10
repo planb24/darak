@@ -38,6 +38,8 @@ export const LoginPage = (): ReactElement => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
+  const navigate = useNavigate();
+
   const { handleSubmit, register, formState: { isValid } } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setWheel(true);
@@ -45,8 +47,7 @@ export const LoginPage = (): ReactElement => {
       headers: {
         "Content-Type": "application/json"
       }, withCredentials: true
-    }).then((result) => { 
-      console.log(result.data._id)
+    }).then((result) => {
       setWheel(false);
       toast({
         title: '로그인에 성공했어요',
@@ -55,7 +56,8 @@ export const LoginPage = (): ReactElement => {
         duration: 2000,
         isClosable: false,
       });
-      // navigate("/main");
+      localStorage.setItem("token", result.data['token']);
+      navigate("/");
     }).catch((error) => {
       console.error(error);
       setWheel(false);
@@ -68,8 +70,6 @@ export const LoginPage = (): ReactElement => {
       });
     });
   }
-
-  const navigate = useNavigate();
 
   const firebaseConfig = {
     apiKey: import.meta.env.VITE_API_KEY,
