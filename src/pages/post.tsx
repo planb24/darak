@@ -133,6 +133,18 @@ export const PostPage = (): ReactElement => {
 
   async function postRequest(){
     setWheel(true);
+    setTimeout(()=>{
+      setWheel(false);
+      toast({
+        title: '글이 작성되었어요',
+        description: "",
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
+      navigate("/");
+    }, 2000);
+    /*
     // const imgg = new Image();
     // imgg.src = "/web-sample3.jpg";
     var c = document.createElement('canvas');
@@ -177,6 +189,8 @@ export const PostPage = (): ReactElement => {
         isClosable: true,
       });
     });
+
+    */
   }
 
   return (
@@ -190,10 +204,12 @@ export const PostPage = (): ReactElement => {
             <VStack>
               <Heading>안녕하세요! 저는 지니에요.</Heading>
               <Text fontSize='lg' mb='1.5rem'>가지고 있는 책을 제가 마법으로 확인해 드릴게요.</Text>
-              <Card width='100%' mb='1.5rem'>
+              <Card width='100%' mb='1.5rem' pt='1.2rem'>
                 <Center>
                   <VStack>
-                    <Image src='https://image.yes24.com/sysimage/buyBack/isbn.svg' objectFit='contain' maxHeight='8rem' maxWidth='80%' />
+                    <Box backgroundColor='#f0f0f0' borderRadius='15px' align='center' mb='0.5rem'>
+                      <Image src='https://image.yes24.com/sysimage/buyBack/isbn.svg' objectFit='contain' maxHeight='8rem' maxWidth='80%' />
+                    </Box>
                     <Text mb='1rem'>책 뒷면에 표시되어 있는 ISBN을 확인해 주세요!</Text>
                   </VStack>
                 </Center>
@@ -485,6 +501,21 @@ export const PostPage = (): ReactElement => {
             variant='filled'
             mb='0.5rem'
           />
+
+          {
+            blind===0? (
+              <Input
+                size='lg'
+                type='string'
+                isDisabled={wheel}
+                placeholder='가격'
+                value={'15,000원'}
+                variant='filled'
+                mb='0.5rem'
+              />
+            ) : null
+          }
+
           <Textarea
             size='lg'
             id='postDetail'
@@ -495,10 +526,6 @@ export const PostPage = (): ReactElement => {
             variant='filled'
             mb='0.5rem'
           />
-
-          {
-            
-          }
 
           <Button
             width='100%'

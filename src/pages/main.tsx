@@ -43,6 +43,7 @@ export const MainPage = (): ReactElement => {
       "relativeTimeString": "3분 전",
       "minimalPrice": "1,200원",
       "isMultipleProduct": true,
+      "isPhotoBlurred": true
     },
     {
       "itemId": 948324924094,
@@ -54,7 +55,8 @@ export const MainPage = (): ReactElement => {
       "relativeTimeString": "5분 전",
       "minimalPrice": "4,000원",
       "isMultipleProduct": false,
-    }
+      "isPhotoBlurred": false
+    },
   ];
 
   const { colorMode, toggleColorMode } = useColorMode();
@@ -101,11 +103,14 @@ export const MainPage = (): ReactElement => {
         EVENT_DATA.map(elem => (
           <Box key={elem.itemId} mb='1.2rem' >
             <HStack>
-              <Image src={elem.imageSrc}
-                objectFit='cover'
-                boxSize='110px'
-                borderRadius='5px'
-              />
+              <Box filter='auto' blur={elem.isPhotoBlurred === true ?'3px':'0px'}>
+                <Image src={elem.imageSrc}
+                  objectFit='cover'
+                  boxSize='110px'
+                  borderRadius='5px'
+                />
+              </Box>
+              
               <VStack align='left' gap={0}>
                 <Text fontFamily='LINESeedKR-Bd'>{elem.title}</Text>\
                 <HStack spacing={2} mb='6px'>
@@ -122,12 +127,37 @@ export const MainPage = (): ReactElement => {
           </Box>
         ))
       }
+
+      <Box mb='1.2rem' onClick={()=>{navigate("/bookDetail")}}>
+        <HStack>
+          <Box filter='auto' blur='4px'>
+            <Image src='/web-sample8.jpg'
+              objectFit='cover'
+              boxSize='110px'
+              borderRadius='5px'
+            />
+          </Box>
+          
+          <VStack align='left' gap={0}>
+            <Text fontFamily='LINESeedKR-Bd'>{"\"어릴 적 한 번 쯤은 꿔본 꿈\""}</Text>\
+            <HStack spacing={2} mb='6px'>
+              {
+                ["숨겨진 태그"].map(el => (
+                  <Tag key={el} size='sm' variant='outline' colorScheme='gray' fontFamily='LINESeedKR-Bd'>{el}</Tag>
+                ))
+              }
+            </HStack>
+            <Text color={colorMode === 'light' ? 'gray' : 'lightgray'}>기흥동 · 18분 전</Text>
+            <Text>2주 대여 가능</Text>
+          </VStack>
+        </HStack>
+      </Box>
       
       <Grid templateColumns='repeat(3, 1fr)' gap={3} mt='rem' mb='0.8rem'>
         {
           TOP_BANNER_MENU.map(elem => (
             <GridItem key={elem.title}>
-              <Card key={elem.title} alignItems='center' py='1.5rem' onClick={()=>{navigate(-1)}}>
+              <Card key={elem.title} alignItems='center' py='1.5rem' onClick={()=>{navigate(elem.navigateTo)}}>
                 <Image src={elem.iconSrc} objectFit='contain' width='40%' mb='1rem' />
                 <Text fontSize='lg'>{elem.title}</Text>
               </Card>

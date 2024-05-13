@@ -6,3 +6,5 @@ export const CHAT_PATH = "/chat/:eventId" as const;
 export const EVENT_CREATE_PATH = "/post" as const;
 export const PREF_PATH = "/myaccount" as const;
 export const CREDIT_PATH = "/credit" as const;
+export const GOODS_PATH = "/goods" as const;
+export const BOOK_PATH = "/book" as const;
